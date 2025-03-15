@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Dashboard - March 2025</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2rem;
+            color: #1a3c6d;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+        }
+        .card-header {
+            padding: 10px 15px;
+            font-weight: 600;
+            border-bottom: none;
+            border-radius: 8px 8px 0 0;
+        }
+        .card-body {
+            padding: 15px;
+        }
+        .table {
+            margin-bottom: 0;
+            font-size: 13px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .table th, .table td {
+            padding: 8px;
+            vertical-align: middle;
+        }
+        .table-responsive {
+            max-height: 350px;
+            border-radius: 5px;
+        }
+        .summary-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: 500;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .summary-stats span {
+            background: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        canvas {
+            max-height: 300px !important;
+            width: 100%;
+        }
+        .chart-row {
+            margin-bottom: 20px;
+        }
+        .task-chart-container {
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        #taskChartKaarthikeyan, #taskChartRamBalaji, #taskChartOverall {
+            min-height: 600px !important;
+            max-height: 600px !important;
+        }
+        .nav-tabs .nav-link {
+            font-weight: 500;
+            color: #1a3c6d;
+        }
+        .nav-tabs .nav-link.active {
+            background-color: #1a3c6d;
+            color: #fff;
+            border-color: #1a3c6d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Project Dashboard - March 2025</h1>
+
+        <!-- Tabs Navigation -->
+        <ul class="nav nav-tabs" id="reportTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="overall-tab" data-bs-toggle="tab" data-bs-target="#overall" type="button" role="tab" aria-controls="overall" aria-selected="false">Overall Report</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="kaarthikeyan-tab" data-bs-toggle="tab" data-bs-target="#kaarthikeyan" type="button" role="tab" aria-controls="kaarthikeyan" aria-selected="true">Kaarthikeyan's Report</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="rambalaji-tab" data-bs-toggle="tab" data-bs-target="#rambalaji" type="button" role="tab" aria-controls="rambalaji" aria-selected="false">RamBalaji's Report</button>
+            </li>
+           
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="reportTabsContent">
+            <!-- Kaarthikeyan's Report -->
+            <div class="tab-pane fade show active" id="kaarthikeyan" role="tabpanel" aria-labelledby="kaarthikeyan-tab">
+                <!-- Summary -->
+                <div class="card">
+                    <div class="card-header bg-dark text-white">Summary</div>
+                    <div class="card-body">
+                        <div class="summary-stats">
+                            <span><strong>Planned Hours:</strong> 149.0</span>
+                            <span><strong>Spending Hours:</strong> 149.0</span>
+                            <span><strong>Total Bugs:</strong> 23.0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Table -->
+                <div class="card">
+                    <div class="card-header bg-primary text-white">Project Details</div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Project</th>
+                                        <th>Client</th>
+                                        <th>Task</th>
+                                        <th>Plan Hrs</th>
+                                        <th>Spent Hrs</th>
+                                        <th>Bugs</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>2025-02-03</td><td>ERP</td><td>RAX</td><td>ERP Support</td><td>2.0</td><td>2.0</td><td></td><td>Waiting</td></tr>
+                                    <tr><td>2025-02-03</td><td>ACS Static</td><td>RAX</td><td>ACS Testing</td><td>3.5</td><td>3.5</td><td>2.0</td><td>Bug Raised</td></tr>
+                                    <tr><td>2025-02-03</td><td>CMMS</td><td>RAX</td><td>2 Way Device Testing</td><td>1.0</td><td>1.0</td><td></td><td>Completed</td></tr>
+                                    <tr><td>2025-02-03</td><td>Meeting</td><td>RAX</td><td>Reporting Meeting</td><td>1.5</td><td>1.5</td><td></td><td>Completed</td></tr>
+                                    <tr><td>2025-02-04</td><td>ACS Static</td><td>Kochar Tech</td><td>Server Pack Update</td><td>1.0</td><td>1.0</td><td></td><td>Completed</td></tr>
+                                    <tr><td>2025-02-04</td><td>ACS Static</td><td>RAX</td><td>ACS Testing</td><td>6.0</td><td>6.0</td><td>1.0</td><td>Bug Raised</td></tr>
+                                    <tr><td>2025-02-05</td><td>ACS Static</td><td>RAX</td><td>ACS Testing</td><td>2.0</td><td>2.0</td><td>1.0</td><td>Bug Raised</td></tr>
+                                    <tr><td>2025-02-05</td><td>ERP</td><td>RAX</td><td>ERP Issue Support</td><td>2.0</td><td>2.0</td><td></td><td>Completed</td></tr>
+                                    <tr><td>2025-02-05</td><td>CMMS</td><td>SIS</td><td>SIS points testing</td><td>2.0</td><td>2.0</td><td></td><td>Pending</td></tr>
+                                    <tr><td>2025-02-06</td><td>CMMS</td><td>SIS</td><td>SIS points testing</td><td>3.0</td><td>3.0</td><td>7.0</td><td>Bug Raised</td></tr>
+                                    <tr><td>2025-02-06</td><td>EVA</td><td>RAX</td><td>EVA Pro Plus Testing</td><td>3.0</td><td>3.0</td><td></td><td>Pending</td></tr>
+                                    <tr><td>2025-02-06</td><td>ACS Static</td><td>RAX</td><td>ACS Testing</td><td>2.0</td><td>2.0</td><td></td><td>Pending</td></tr>
+                                    <tr><td>2025-02-07</td><td>ACS Static</td><td>RAX</td><td>ACS Testing</td><td>2.0</td><td>2.0</td><td></td><td>Pending</td></tr>
+                                    <tr><td>2025-02-07</td><td>CMMS</td><td>SIS</td><td>SIS points testing</td><td>5.0</td><td>5.0</td><td>3.0</td><td>Bug Raised</td></tr>
+                                    <tr><td>2025-02-07</td><td>CMMS- Agent App</td><td>SIS</td><td>SIS points testing</td><td>1.0</td><td>1.0</td><td>1.0</td><td>Bug Raised</td></tr>
+                                    <tr><td>2025-02-10</td><td>ERP</td><td>RAX</td><td>ERP testing</td><td>3.0</td><td>3.0</td><td></td><td>Pending</td></tr>
+                                    <tr><td>2025-02-10</td><td>ACS Static</td><td>RAX</td><td>ACS Testing</td><td>3.0</td><td>3.0</td><td>1.0</td><td>Bug Raised</td></tr>
+                                    <tr><td>2025-02-10</td><td>ERP</td><td>RAX</td><td>ERP Issue Support</td><td>2.0</td><td>2.0</td><td></td><td>Completed</td></tr>
+                                    <tr><td>2025-02-11</td><td>EVA</td><td>ANG</td><td>EVA Support</td><td>1.5</td><td>1.5</td><td></td><td>Pending</td></tr>
+                                    <tr><td>2025-02-11</td><td>ACS Static</td><td>RAX</td><td>Session timeout</td><td>4.0</td><td>4.0</td><td>2.0</td><td>Bug Raised</td></tr>
+                                    <tr><td>2025-02-11</td><td>ERP</td><td>RAX</td><td>ERP Support</td><td>2.5</td><td>2.5</td><td></td><td>Pending</td></tr>
+                                    <tr><td>2025-02-12</td><td>ERP</td><td>RAX</td><td>ERP Issue Support</td><td>4.0</td><td>4.0</td><td></td><td>Completed</td></tr>
+                                    <tr><td>2025-02-13</td><td>EVA</td><td>RAX</td><td>EVA Pro Plus Testing</td><td>3.0</td><td>3.0</td><td></td><td>Completed</td></tr>
+                                    <tr><td>2025-02-13</td><td>ERP</td><td>RAX</td><td>ERP Issue Support</td><td>5.0</td><td>5.0</td><td></td><td>Completed</td></tr>
+                                    <tr><td>2025-02-14</td><td>ACS Static</td><td>RAX</td><td>ACS Testing</td><td>8.0</td><td>8.0</td><td>2.0</td><td>Bug Raised</td></tr>
+                                    <tr><td>2025-02-15</td><td>ACS Static</td><td>RAX</td><td>ACS Flow Testing</td><td>6.0</td><td>6.0</td><td></td><td>Pending</td></tr>
+                                    <tr><td>2025-02-17</td><td>ACS Static</td><td>RAX</td><td>ACS Flow Testing</td><td>8.0</td><td>8.0</td><td></td><td>Pending</td></tr>
+                                    <tr><td>2025-02-18</td><td>ACS Static</td><td>RAX</td><td>ACS Flow Testing</td><td>2.0</td><td>2.0</td><td></td><td>Pending</td></tr>
+                                    <tr><td>2025-02-18</td><td>ACS Static</td><td>RAX</td><td>ACS Flow Tested</td><td>2.0</td><td>2.0</td><td></td><td>Completed</td></tr>
+                                    <tr><td>2025-02-18</td><td>ERP</td><td>RAX</td><td>ERP Issue Support</td><td>4.0</td><td>4.0</td><td></td><td>Completed</td></tr>
+                                    <tr><td>2025-02-19</td><td>ACS Static</td><td>RAX</td><td>ACS Tested</td><td>3.0</td><td>3.0</td><td></td><td>Completed</td></tr>
+                                    <tr><td>2025-02-19</td><td>ERP</td><td>RAX</td><td>ERP Issue Support</td><td>5.0</td><td>5.0</td><td></td><td>Completed</td></tr>
+                                    <tr><td>2025-02-20</td><td>ERP</td><td>RAX</td><td>ERP Issue Support</td><td>5.0</td><td>5.0</td><td></td><td>Completed</td></tr>
+                                    <tr><td>2025-02-21</td><td>RMC</td><td>RAX</td><td>RMC Setup</td><td>3.0</td><td>3.0</td><td></td><td>Completed</td></tr>
+                                    <tr><td>2025-02-24</td><td>RMC</td><td>RAX</td><td>RMC Testing</td><td>3.0</td><td>3.0</td><td></td><td>Completed</td></tr>
+                                    <tr><td>2025-02-24</td><td>ERP</td><td>RAX</td><td>ERP Issue Support</td><td>5.0</td><td>5.0</td><td></td><td>Completed</td></tr>
+                                    <tr><td>2025-02-25</td><td>RMC</td><td>RAX</td><td>RMC Testing</td><td>7.0</td><td>7.0</td><td></td><td>Pending</td></tr>
+                                    <tr><td>2025-02-25</td><td>ERP</td><td>RAX</td><td>ERP Issue Support</td><td>1.0</td><td>1.0</td><td></td><td>Completed</td></tr>
+                                    <tr><td>2025-02-26</td><td>RMC</td><td>RAX</td><td>RMC Testing</td><td>8.0</td><td>8.0</td><td></td><td>Completed</td></tr>
+                                    <tr><td>2025-02-28</td><td>ACS Static</td><td>RAX</td><td>ACS Testcase</td><td>6.5</td><td>6.5</td><td></td><td>Pending</td></tr>
+                                    <tr><td>2025-02-28</td><td>CMMS</td><td>RAX</td><td>CMMS Demo</td><td>1.5</td><td>1.5</td><td></td><td>Completed</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="row chart-row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-info text-white">Spending Hours Trend</div>
+                            <div class="card-body"><canvas id="trendsChartKaarthikeyan"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">Spending Hours by Project</div>
+                            <div class="card-body"><canvas id="projectHoursChartKaarthikeyan"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row chart-row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-warning text-dark">Bug Count by Project</div>
+                            <div class="card-body"><canvas id="bugChartKaarthikeyan"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-danger text-white">Spending Hours by Status</div>
+                            <div class="card-body"><canvas id="statusChartKaarthikeyan"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row chart-row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header bg-purple text-white" style="background-color: #6f42c1;">Spending Hours by Task</div>
+                            <div class="card-body task-chart-container"><canvas id="taskChartKaarthikeyan"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RamBalaji's Report -->
+            <div class="tab-pane fade" id="rambalaji" role="tabpanel" aria-labelledby="rambalaji-tab">
+                <!-- Summary -->
+                <div class="card">
+                    <div class="card-header bg-dark text-white">Summary</div>
+                    <div class="card-body">
+                        <div class="summary-stats">
+                            <span><strong>Planned Hours:</strong> 1122</span>
+                            <span><strong>Spent Hours:</strong> 149</span>
+                            <span><strong>Total Bugs:</strong> 3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Table -->
+                <div class="card">
+                    <div class="card-header bg-primary text-white">Project Details</div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Project</th>
+                                        <th>Client</th>
+                                        <th>Task</th>
+                                        <th>Plan Hrs</th>
+                                        <th>Spent Hrs</th>
+                                        <th>Bugs</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>2025-02-01</td><td>CMMS</td><td>SIS Vprotect</td><td>SIA Service Optimization</td><td>25</td><td>6</td><td>1</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-01</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-03</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-03</td><td>CMMS</td><td>SIS Vprotect</td><td>SIA Service Optimization</td><td>25</td><td>3</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-03</td><td>CMMS</td><td>SIS Vprotect</td><td>DVR Health Status Service Optimization</td><td>24</td><td>3</td><td>1</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-04</td><td>CMMS</td><td>SIS Vprotect</td><td>DVR Health Status Service Optimization</td><td>24</td><td>3</td><td>1</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-04</td><td>CMMS</td><td>SIS Vprotect</td><td>SIA Service Optimization</td><td>25</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-04</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-05</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-05</td><td>CMMS</td><td>SIS Vprotect</td><td>SIA Service Optimization</td><td>25</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-05</td><td>CMMS</td><td>SIS Vprotect</td><td>DVR Health Status Service Optimization</td><td>24</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-05</td><td>ERP-Smile</td><td>Rax-Tech International</td><td>Bank Advise Report Not Exported</td><td>6</td><td>6</td><td>0</td><td>Completed</td></tr>
+                                    <tr><td>2025-02-06</td><td>CMMS</td><td>SIS Vprotect</td><td>SIA Service Optimization</td><td>25</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-06</td><td>CMMS</td><td>SIS Vprotect</td><td>SIA Service Optimization</td><td>25</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-06</td><td>CMMS</td><td>SIS Vprotect</td><td>SIA Service Optimization</td><td>25</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-06</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-07</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-07</td><td>CMMS</td><td>SIS Vprotect</td><td>SIA Service Optimization</td><td>25</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-07</td><td>CMMS</td><td>SIS Vprotect</td><td>Webclient Portal Modification</td><td>14</td><td>8</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-10</td><td>CMMS</td><td>SIS Vprotect</td><td>Webclient Portal Modification</td><td>14</td><td>4</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-10</td><td>SSMS C#</td><td>Vethathiri Maharishi Hr. Sec. School</td><td>Data Correction & Update Claimbill Issue</td><td>8</td><td>4</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-10</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-11</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-11</td><td>CMMS</td><td>SIS Vprotect</td><td>Webclient Portal Modification</td><td>14</td><td>4</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-11</td><td>SSMS C#</td><td>Vethathiri Maharishi Hr. Sec. School</td><td>Data Correction & Update Claimbill Issue</td><td>8</td><td>4</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-12</td><td>SSMS C#</td><td>Vethathiri Maharishi Hr. Sec. School</td><td>Data Correction & Update Claimbill Issue</td><td>8</td><td>4</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-12</td><td>CMMS</td><td>SIS Vprotect</td><td>SignalR Service Stopped Automatically</td><td>4</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-12</td><td>CMMS</td><td>SIS Vprotect</td><td>SIA Service Optimization</td><td>25</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-12</td><td>CMMS</td><td>SIS Vprotect</td><td>DVR Health Status Service Optimization</td><td>24</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-12</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-13</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-13</td><td>CMMS</td><td>SIS Vprotect</td><td>DVR Health Status Service Optimization</td><td>24</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-13</td><td>CMMS</td><td>SIS Vprotect</td><td>SIA Service Optimization</td><td>25</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-13</td><td>CMMS</td><td>SIS Vprotect</td><td>SignalR Service Stopped Automatically</td><td>4</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-13</td><td>SSMS C#</td><td>Vethathiri Maharishi Hr. Sec. School</td><td>Data Correction & Update Claimbill Issue</td><td>8</td><td>4</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-14</td><td>SSMS C#</td><td>Vethathiri Maharishi Hr. Sec. School</td><td>Data Correction & Update Claimbill Issue</td><td>8</td><td>4</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-14</td><td>CMMS</td><td>SIS Vprotect</td><td>SignalR Service Stopped Automatically</td><td>4</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-14</td><td>CMMS</td><td>SIS Vprotect</td><td>SIA Service Optimization</td><td>25</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-14</td><td>CMMS</td><td>SIS Vprotect</td><td>DVR Health Status Service Optimization</td><td>24</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-14</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-15</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-15</td><td>CMMS</td><td>SIS Vprotect</td><td>DVR Health Status Service Optimization</td><td>24</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-15</td><td>CMMS</td><td>SIS Vprotect</td><td>SIA Service Optimization</td><td>25</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-15</td><td>CMMS</td><td>SIS Vprotect</td><td>SignalR Service Stopped Automatically</td><td>4</td><td>1</td><td>0</td><td>Completed</td></tr>
+                                    <tr><td>2025-02-15</td><td>SSMS C#</td><td>Vethathiri Maharishi Hr. Sec. School</td><td>Data Correction & Update Claimbill Issue</td><td>8</td><td>4</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-17</td><td>SSMS C#</td><td>Vethathiri Maharishi Hr. Sec. School</td><td>Data Correction & Update Claimbill Issue</td><td>8</td><td>3</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-17</td><td>CMMS</td><td>SIS Vprotect</td><td>DVR Health Status Service Optimization</td><td>24</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-17</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-18</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-18</td><td>CMMS</td><td>SIS Vprotect</td><td>DVR Health Status Service Optimization</td><td>24</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-18</td><td>SSMS C#</td><td>Vethathiri Maharishi Hr. Sec. School</td><td>Data Correction & Update Claimbill Issue</td><td>8</td><td>3</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-19</td><td>SSMS C#</td><td>Vethathiri Maharishi Hr. Sec. School</td><td>Data Correction & Update Claimbill Issue</td><td>8</td><td>3</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-19</td><td>CMMS</td><td>SIS Vprotect</td><td>DVR Health Status Service Optimization</td><td>24</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-19</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-20</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-20</td><td>CMMS</td><td>SIS Vprotect</td><td>DVR Health Status Service Optimization</td><td>24</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-20</td><td>SSMS C#</td><td>Vethathiri Maharishi Hr. Sec. School</td><td>Data Correction & Update Claimbill Issue</td><td>8</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-21</td><td>SSMS C#</td><td>Vethathiri Maharishi Hr. Sec. School</td><td>Data Correction & Update Claimbill Issue</td><td>8</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-21</td><td>SSMS C#</td><td>Vethathiri Maharishi Hr. Sec. School</td><td>Data Correction & Update Claimbill Issue</td><td>8</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-21</td><td>CMMS</td><td>SIS Vprotect</td><td>DVR Health Status Service Optimization</td><td>24</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-21</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-24</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-24</td><td>SSMS C#</td><td>Vethathiri Maharishi Hr. Sec. School</td><td>Data Correction & Update Claimbill Issue</td><td>8</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-24</td><td>Others</td><td>Rax-Tech International</td><td>Bureau Veritas Stage 1 Audit</td><td>8</td><td>8</td><td>0</td><td>Completed</td></tr>
+                                    <tr><td>2025-02-25</td><td>SSMS C#</td><td>Vethathiri Maharishi Hr. Sec. School</td><td>Data Correction & Update Claimbill Issue</td><td>8</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-25</td><td>CMMS</td><td>SIS Vprotect</td><td>DVR Health Status Service Optimization</td><td>24</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-25</td><td>CMMS</td><td>SIS Vprotect</td><td>DVR Health Status Service Optimization</td><td>24</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-25</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-26</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-26</td><td>CMMS</td><td>SIS Vprotect</td><td>DVR Health Status Service Optimization</td><td>24</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-26</td><td>SSMS C#</td><td>Vethathiri Maharishi Hr. Sec. School</td><td>Data Correction & Update Claimbill Issue</td><td>8</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-27</td><td>SSMS C#</td><td>Vethathiri Maharishi Hr. Sec. School</td><td>Data Correction & Update Claimbill Issue</td><td>8</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-27</td><td>CMMS</td><td>SIS Vprotect</td><td>DVR Health Status Service Optimization</td><td>24</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-27</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-28</td><td>CMMS</td><td>SIS Vprotect</td><td>Team Cooperation, Follow Up & Guidance</td><td>40</td><td>1</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-28</td><td>CMMS</td><td>SIS Vprotect</td><td>DVR Health Status Service Optimization</td><td>24</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                    <tr><td>2025-02-28</td><td>SSMS C#</td><td>Vethathiri Maharishi Hr. Sec. School</td><td>Data Correction & Update Claimbill Issue</td><td>8</td><td>2</td><td>0</td><td>Under Testing</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="row chart-row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-info text-white">Spending Hours Trend</div>
+                            <div class="card-body"><canvas id="trendsChartRamBalaji"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">Spending Hours by Project</div>
+                            <div class="card-body"><canvas id="projectHoursChartRamBalaji"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row chart-row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-warning text-dark">Bug Count by Project</div>
+                            <div class="card-body"><canvas id="bugChartRamBalaji"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-danger text-white">Spending Hours by Status</div>
+                            <div class="card-body"><canvas id="statusChartRamBalaji"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row chart-row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header bg-purple text-white" style="background-color: #6f42c1;">Spending Hours by Task</div>
+                            <div class="card-body task-chart-container"><canvas id="taskChartRamBalaji"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overall Report -->
+            <div class="tab-pane fade" id="overall" role="tabpanel" aria-labelledby="overall-tab">
+                <!-- Summary -->
+                <div class="card">
+                    <div class="card-header bg-dark text-white">Overall Summary</div>
+                    <div class="card-body">
+                        <div class="summary-stats">
+                            <span><strong>Planned Hours:</strong> 1271</span>
+                            <span><strong>Spent Hours:</strong> 298</span>
+                            <span><strong>Total Bugs:</strong> 26</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="row chart-row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-info text-white">Spending Hours Trend</div>
+                            <div class="card-body"><canvas id="trendsChartOverall"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">Spending Hours by Project</div>
+                            <div class="card-body"><canvas id="projectHoursChartOverall"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row chart-row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-warning text-dark">Bug Count by Project</div>
+                            <div class="card-body"><canvas id="bugChartOverall"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-danger text-white">Spending Hours by Status</div>
+                            <div class="card-body"><canvas id="statusChartOverall"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row chart-row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header bg-purple text-white" style="background-color: #6f42c1;">Spending Hours by Task</div>
+                            <div class="card-body task-chart-container"><canvas id="taskChartOverall"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Kaarthikeyan's Charts
+        const trendsDataKaarthikeyan = {
+            labels: ['02-03', '02-04', '02-05', '02-06', '02-07', '02-10', '02-11', '02-12', '02-13', '02-14', '02-15', '02-17', '02-18', '02-19', '02-20', '02-21', '02-24', '02-25', '02-26', '02-28'],
+            datasets: [{
+                label: 'Spending Hours',
+                data: [8.0, 7.0, 6.0, 8.0, 8.0, 8.0, 8.0, 4.0, 8.0, 8.0, 6.0, 8.0, 8.0, 8.0, 5.0, 3.0, 8.0, 8.0, 8.0, 8.0],
+                backgroundColor: '#36A2EB',
+                borderColor: '#2c8ac9',
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('trendsChartKaarthikeyan').getContext('2d'), {
+            type: 'bar',
+            data: trendsDataKaarthikeyan,
+            options: { maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { stepSize: 2, font: { size: 12 } }, title: { display: true, text: 'Hours', font: { size: 12 } } }, x: { ticks: { autoSkip: false, maxRotation: 45, minRotation: 45, font: { size: 10 } }, title: { display: true, text: 'Date', font: { size: 12 } } } }, plugins: { legend: { display: false }, title: { display: true, text: 'Hours by Date', font: { size: 14 } } } }
+        });
+
+        const projectHoursDataKaarthikeyan = {
+            labels: ['ACS Static', 'CMMS', 'CMMS- Agent App', 'ERP', 'EVA', 'Meeting', 'RMC'],
+            datasets: [{
+                data: [61.5, 13.5, 1.0, 47.5, 7.5, 1.5, 21.0],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#C9CBCF'],
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('projectHoursChartKaarthikeyan').getContext('2d'), {
+            type: 'pie',
+            data: projectHoursDataKaarthikeyan,
+            options: { maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 12 } } }, title: { display: true, text: 'Hours by Project', font: { size: 14 } }, tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw} hrs` } } } }
+        });
+
+        const bugDataKaarthikeyan = {
+            labels: ['ACS Static', 'CMMS', 'CMMS- Agent App', 'ERP', 'EVA', 'Meeting', 'RMC'],
+            datasets: [{
+                data: [12.0, 10.0, 1.0, 0.0, 0.0, 0.0, 0.0],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#C9CBCF'],
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('bugChartKaarthikeyan').getContext('2d'), {
+            type: 'pie',
+            data: bugDataKaarthikeyan,
+            options: { maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 12 } } }, title: { display: true, text: 'Bugs by Project', font: { size: 14 } }, tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw} bugs` } } } }
+        });
+
+        const statusDataKaarthikeyan = {
+            labels: ['Completed', 'Pending', 'Bug Raised', 'Waiting', 'Pending from client side'],
+            datasets: [{
+                data: [73.0, 47.0, 26.5, 2.0, 1.5],
+                backgroundColor: ['#28A745', '#FFC107', '#DC3545', '#6C757D', '#17A2B8'],
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('statusChartKaarthikeyan').getContext('2d'), {
+            type: 'pie',
+            data: statusDataKaarthikeyan,
+            options: { maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 12 } } }, title: { display: true, text: 'Hours by Status', font: { size: 14 } }, tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw} hrs` } } } }
+        });
+
+        const taskDataKaarthikeyan = {
+            labels: ['ERP Support', 'ACS Testing', '2 Way Device Testing', 'Reporting Meeting', 'Server Pack Update', 'ERP Issue Support', 'SIS points testing', 'EVA Pro Plus Testing', 'ERP testing', 'EVA Support', 'Session timeout', 'ACS Flow Testing', 'ACS Flow Tested', 'ACS Tested', 'RMC Setup', 'RMC Testing', 'ACS Testcase', 'CMMS Demo'],
+            datasets: [{
+                label: 'Spending Hours',
+                data: [7.0, 34.5, 1.0, 1.5, 1.0, 31.0, 11.0, 6.0, 3.0, 1.5, 4.0, 16.0, 2.0, 3.0, 3.0, 18.0, 6.5, 1.5],
+                backgroundColor: '#6f42c1',
+                borderColor: '#5a32a3',
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('taskChartKaarthikeyan').getContext('2d'), {
+            type: 'bar',
+            data: taskDataKaarthikeyan,
+            options: { indexAxis: 'y', maintainAspectRatio: false, scales: { x: { beginAtZero: true, ticks: { stepSize: 5, font: { size: 12 } }, title: { display: true, text: 'Hours', font: { size: 12 } } }, y: { ticks: { font: { size: 10 } }, title: { display: true, text: 'Task', font: { size: 12 } } } }, plugins: { legend: { display: false }, title: { display: true, text: 'Hours by Task', font: { size: 14 } }, tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw} hrs` } } } }
+        });
+
+        // RamBalaji's Charts
+        const trendsDataRamBalaji = {
+            labels: ['02-01', '02-03', '02-04', '02-05', '02-06', '02-07', '02-10', '02-11', '02-12', '02-13', '02-14', '02-15', '02-17', '02-18', '02-19', '02-20', '02-21', '02-24', '02-25', '02-26', '02-27', '02-28'],
+            datasets: [{
+                label: 'Spending Hours',
+                data: [8, 8, 6, 11, 5, 10, 9, 9, 9, 9, 9, 9, 6, 6, 6, 5, 7, 11, 7, 5, 5, 5],
+                backgroundColor: '#36A2EB',
+                borderColor: '#2c8ac9',
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('trendsChartRamBalaji').getContext('2d'), {
+            type: 'bar',
+            data: trendsDataRamBalaji,
+            options: { maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { stepSize: 2, font: { size: 12 } }, title: { display: true, text: 'Hours', font: { size: 12 } } }, x: { ticks: { autoSkip: false, maxRotation: 45, minRotation: 45, font: { size: 10 } }, title: { display: true, text: 'Date', font: { size: 12 } } } }, plugins: { legend: { display: false }, title: { display: true, text: 'Hours by Date', font: { size: 14 } } } }
+        });
+
+        const projectHoursDataRamBalaji = {
+            labels: ['CMMS', 'ERP-Smile', 'SSMS C#', 'Others'],
+            datasets: [{
+                data: [101, 6, 34, 8],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('projectHoursChartRamBalaji').getContext('2d'), {
+            type: 'pie',
+            data: projectHoursDataRamBalaji,
+            options: { maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 12 } } }, title: { display: true, text: 'Hours by Project', font: { size: 14 } }, tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw} hrs` } } } }
+        });
+
+        const bugDataRamBalaji = {
+            labels: ['CMMS', 'ERP-Smile', 'SSMS C#', 'Others'],
+            datasets: [{
+                data: [3, 0, 0, 0],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('bugChartRamBalaji').getContext('2d'), {
+            type: 'pie',
+            data: bugDataRamBalaji,
+            options: { maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 12 } } }, title: { display: true, text: 'Bugs by Project', font: { size: 14 } }, tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw} bugs` } } } }
+        });
+
+        const statusDataRamBalaji = {
+            labels: ['Completed', 'Under Testing'],
+            datasets: [{
+                data: [15, 134],
+                backgroundColor: ['#28A745', '#FFC107'],
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('statusChartRamBalaji').getContext('2d'), {
+            type: 'pie',
+            data: statusDataRamBalaji,
+            options: { maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 12 } } }, title: { display: true, text: 'Hours by Status', font: { size: 14 } }, tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw} hrs` } } } }
+        });
+
+        const taskDataRamBalaji = {
+            labels: ['SIA Service Optimization', 'Team Cooperation, Follow Up & Guidance', 'DVR Health Status Service Optimization', 'Bank Advise Report Not Exported', 'Webclient Portal Modification', 'Data Correction & Update Claimbill Issue', 'SignalR Service Stopped Automatically', 'Bureau Veritas Stage 1 Audit'],
+            datasets: [{
+                label: 'Spending Hours',
+                data: [19, 34, 32, 6, 16, 34, 4, 8],
+                backgroundColor: '#6f42c1',
+                borderColor: '#5a32a3',
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('taskChartRamBalaji').getContext('2d'), {
+            type: 'bar',
+            data: taskDataRamBalaji,
+            options: { indexAxis: 'y', maintainAspectRatio: false, scales: { x: { beginAtZero: true, ticks: { stepSize: 5, font: { size: 12 } }, title: { display: true, text: 'Hours', font: { size: 12 } } }, y: { ticks: { font: { size: 10 } }, title: { display: true, text: 'Task', font: { size: 12 } } } }, plugins: { legend: { display: false }, title: { display: true, text: 'Hours by Task', font: { size: 14 } }, tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw} hrs` } } } }
+        });
+
+        // Overall Charts
+        const trendsDataOverall = {
+            labels: ['02-01', '02-03', '02-04', '02-05', '02-06', '02-07', '02-10', '02-11', '02-12', '02-13', '02-14', '02-15', '02-17', '02-18', '02-19', '02-20', '02-21', '02-24', '02-25', '02-26', '02-27', '02-28'],
+            datasets: [{
+                label: 'Spending Hours',
+                data: [8, 16, 13, 17, 13, 18, 17, 17, 13, 17, 17, 15, 14, 14, 14, 10, 10, 19, 15, 13, 13, 13],
+                backgroundColor: '#36A2EB',
+                borderColor: '#2c8ac9',
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('trendsChartOverall').getContext('2d'), {
+            type: 'bar',
+            data: trendsDataOverall,
+            options: { maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { stepSize: 5, font: { size: 12 } }, title: { display: true, text: 'Hours', font: { size: 12 } } }, x: { ticks: { autoSkip: false, maxRotation: 45, minRotation: 45, font: { size: 10 } }, title: { display: true, text: 'Date', font: { size: 12 } } } }, plugins: { legend: { display: false }, title: { display: true, text: 'Combined Hours by Date', font: { size: 14 } } } }
+        });
+
+        const projectHoursDataOverall = {
+            labels: ['ACS Static', 'CMMS', 'CMMS- Agent App', 'ERP', 'ERP-Smile', 'EVA', 'Meeting', 'RMC', 'SSMS C#', 'Others'],
+            datasets: [{
+                data: [61.5, 114.5, 1.0, 47.5, 6, 7.5, 1.5, 21.0, 34, 8],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#C9CBCF', '#28A745', '#DC3545', '#6C757D'],
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('projectHoursChartOverall').getContext('2d'), {
+            type: 'pie',
+            data: projectHoursDataOverall,
+            options: { maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 12 } } }, title: { display: true, text: 'Combined Hours by Project', font: { size: 14 } }, tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw} hrs` } } } }
+        });
+
+        const bugDataOverall = {
+            labels: ['ACS Static', 'CMMS', 'CMMS- Agent App', 'ERP', 'ERP-Smile', 'EVA', 'Meeting', 'RMC', 'SSMS C#', 'Others'],
+            datasets: [{
+                data: [12.0, 13.0, 1.0, 0.0, 0, 0.0, 0.0, 0.0, 0, 0],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#C9CBCF', '#28A745', '#DC3545', '#6C757D'],
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('bugChartOverall').getContext('2d'), {
+            type: 'pie',
+            data: bugDataOverall,
+            options: { maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 12 } } }, title: { display: true, text: 'Combined Bugs by Project', font: { size: 14 } }, tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw} bugs` } } } }
+        });
+
+        const statusDataOverall = {
+            labels: ['Completed', 'Pending', 'Bug Raised', 'Waiting', 'Pending from client side', 'Under Testing'],
+            datasets: [{
+                data: [88, 47, 26.5, 2.0, 1.5, 134],
+                backgroundColor: ['#28A745', '#FFC107', '#DC3545', '#6C757D', '#17A2B8', '#FF9F40'],
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('statusChartOverall').getContext('2d'), {
+            type: 'pie',
+            data: statusDataOverall,
+            options: { maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 12 } } }, title: { display: true, text: 'Combined Hours by Status', font: { size: 14 } }, tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw} hrs` } } } }
+        });
+
+        const taskDataOverall = {
+            labels: [
+                'ERP Support', 'ACS Testing', '2 Way Device Testing', 'Reporting Meeting', 'Server Pack Update', 
+                'ERP Issue Support', 'SIS points testing', 'EVA Pro Plus Testing', 'ERP testing', 'EVA Support', 
+                'Session timeout', 'ACS Flow Testing', 'ACS Flow Tested', 'ACS Tested', 'RMC Setup', 'RMC Testing', 
+                'ACS Testcase', 'CMMS Demo', 'SIA Service Optimization', 'Team Cooperation, Follow Up & Guidance', 
+                'DVR Health Status Service Optimization', 'Bank Advise Report Not Exported', 'Webclient Portal Modification', 
+                'Data Correction & Update Claimbill Issue', 'SignalR Service Stopped Automatically', 'Bureau Veritas Stage 1 Audit'
+            ],
+            datasets: [{
+                label: 'Spending Hours',
+                data: [7.0, 34.5, 1.0, 1.5, 1.0, 31.0, 11.0, 6.0, 3.0, 1.5, 4.0, 16.0, 2.0, 3.0, 3.0, 18.0, 6.5, 1.5, 19, 34, 32, 6, 16, 34, 4, 8],
+                backgroundColor: '#6f42c1',
+                borderColor: '#5a32a3',
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('taskChartOverall').getContext('2d'), {
+            type: 'bar',
+            data: taskDataOverall,
+            options: { indexAxis: 'y', maintainAspectRatio: false, scales: { x: { beginAtZero: true, ticks: { stepSize: 10, font: { size: 12 } }, title: { display: true, text: 'Hours', font: { size: 12 } } }, y: { ticks: { font: { size: 10 } }, title: { display: true, text: 'Task', font: { size: 12 } } } }, plugins: { legend: { display: false }, title: { display: true, text: 'Combined Hours by Task', font: { size: 14 } }, tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw} hrs` } } } }
+        });
+    </script>
+</body>
+</html>
